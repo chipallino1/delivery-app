@@ -1,0 +1,23 @@
+plugins {
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+subprojects {
+    group = 'com.delivery'
+    version = '0.0.1-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.2")
+        }
+    }
+}
