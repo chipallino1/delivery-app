@@ -1,15 +1,15 @@
 package com.delivery;
 
-import com.delivery.services.UserServices;
+import com.delivery.services.UserCrudServices;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/users")
 public class Controller {
-    private final UserServices userServices;
+    private final UserCrudServices userCrudServices;
 
-    public Controller(UserServices userServices) {
-        this.userServices = userServices;
+    public Controller(UserCrudServices userCrudServices) {
+        this.userCrudServices = userCrudServices;
     }
 }
