@@ -2,10 +2,12 @@ plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
-subprojects {
+allprojects {
     group = 'com.delivery'
     version = '0.0.1-SNAPSHOT'
+}
 
+subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java-library'
