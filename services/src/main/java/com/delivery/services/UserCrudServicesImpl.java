@@ -19,7 +19,13 @@ public class UserCrudServicesImpl implements UserCrudServices {
     @Override
     public Mono<UUID> createUser(UserDto userDto) {
         User user = mapDtoToEntity(userDto);
-        return userRepository.save(user).map(User::getId);
+        return userRepository.save(user)
+                .map(User::get_id);
+    }
+
+    @Override
+    public Mono<UserDto> findById(UUID uuid) {
+        return userRepository.findById(uuid).map(this::mapEntityToDto);
     }
 
     private User mapDtoToEntity(UserDto userDto) {
@@ -31,5 +37,16 @@ public class UserCrudServicesImpl implements UserCrudServices {
         user.setUserName(userDto.getUserName());
         user.setPhoneNumber(user.getPhoneNumber());
         return user;
+    }
+
+    private UserDto mapEntityToDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setAge(user.getAge());
+        userDto.setEmail(user.getEmail());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setUserName(user.getUserName());
+        userDto.setPhoneNumber(user.getPhoneNumber());
+        return userDto;
     }
 }
