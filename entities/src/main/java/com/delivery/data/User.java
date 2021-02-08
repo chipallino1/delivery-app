@@ -10,7 +10,7 @@ import java.util.UUID;
 @Document
 public class User {
     @Id
-    private UUID _id;
+    private UUID id;
     private String userName;
     private Integer age;
     private String firstName;
@@ -19,6 +19,6 @@ public class User {
     private String phoneNumber;
 
     public User() {
-        _id = UUID.randomUUID();
+        id = UUID.randomUUID();
     }
 }

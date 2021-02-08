@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -36,5 +37,10 @@ public class UserController {
     @GetMapping("/{id}")
     public Mono<UserDto> findById(@PathVariable("id") UUID uuid) {
         return userCrudServices.findById(uuid);
+    }
+
+    @GetMapping("/")
+    public Flux<UserDto> findAll() {
+        return userCrudServices.findAll();
     }
 }

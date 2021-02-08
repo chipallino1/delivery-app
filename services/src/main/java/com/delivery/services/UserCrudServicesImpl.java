@@ -4,6 +4,7 @@ import com.delivery.data.User;
 import com.delivery.dto.UserDto;
 import com.delivery.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -20,12 +21,17 @@ public class UserCrudServicesImpl implements UserCrudServices {
     public Mono<UUID> createUser(UserDto userDto) {
         User user = mapDtoToEntity(userDto);
         return userRepository.save(user)
-                .map(User::get_id);
+                .map(User::getId);
     }
 
     @Override
     public Mono<UserDto> findById(UUID uuid) {
         return userRepository.findById(uuid).map(this::mapEntityToDto);
+    }
+
+    @Override
+    public Flux<UserDto> findAll() {
+        return userRepository.findAll().map(this::mapEntityToDto);
     }
 
     private User mapDtoToEntity(UserDto userDto) {
@@ -41,6 +47,7 @@ public class UserCrudServicesImpl implements UserCrudServices {
 
     private UserDto mapEntityToDto(User user) {
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         userDto.setAge(user.getAge());
         userDto.setEmail(user.getEmail());
         userDto.setFirstName(user.getFirstName());
