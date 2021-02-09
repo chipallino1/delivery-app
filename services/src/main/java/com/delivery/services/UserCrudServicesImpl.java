@@ -3,6 +3,7 @@ package com.delivery.services;
 import com.delivery.data.User;
 import com.delivery.dto.UserDto;
 import com.delivery.repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -36,24 +37,13 @@ public class UserCrudServicesImpl implements UserCrudServices {
 
     private User mapDtoToEntity(UserDto userDto) {
         User user = new User();
-        user.setAge(userDto.getAge());
-        user.setEmail(userDto.getEmail());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setUserName(userDto.getUserName());
-        user.setPhoneNumber(user.getPhoneNumber());
+        new ModelMapper().map(userDto, user);
         return user;
     }
 
     private UserDto mapEntityToDto(User user) {
         UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setAge(user.getAge());
-        userDto.setEmail(user.getEmail());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setUserName(user.getUserName());
-        userDto.setPhoneNumber(user.getPhoneNumber());
+        new ModelMapper().map(user, userDto);
         return userDto;
     }
 }
