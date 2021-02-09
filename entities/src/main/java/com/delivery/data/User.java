@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -12,7 +13,7 @@ public class User {
     @Id
     private UUID id;
     private String userName;
-    private Integer age;
+    private Date birthDate;
     private String firstName;
     private String lastName;
     private String email;
